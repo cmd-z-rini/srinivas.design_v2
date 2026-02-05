@@ -120,7 +120,7 @@ a {
 .language-bar {
     display: flex;
     align-items: center;
-    gap: 4px; /* Tighter gap between h and i */
+    gap: 8px; /* Consistent gap between all elements */
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 24px;
@@ -193,14 +193,14 @@ a {
     );
 }
 
-/* 4. hola (wavy underline) - Fixed width 35.5px */
+/* 4. hola (wavy underline) - Reduced padding */
 .lang-wavy {
     font-size: 14px;
     font-weight: 700;
     color: #e0e0e0;
-    padding: 0 8px;
+    padding: 0 4px; /* Reduced from 8px to 4px */
     position: relative;
-    margin: 0 6px;
+    margin: 0;
 }
 
 .lang-wavy::after {
@@ -223,7 +223,7 @@ a {
 }
 
 .lang-pill.outline {
-    border: 2px solid white; /* Thicker border for visibility */
+    border: 1.142px solid white; /* Reduced from 2px to match h/i boxes */
     background: transparent;
     color: white;
     font-weight: 700;
@@ -241,7 +241,7 @@ a {
 .lang-circle-icon {
     width: 23.412px;
     height: 23.412px;
-    border: 2px solid white; /* Match outline pill border */
+    border: 1.142px solid white; /* Reduced from 2px to match */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -346,36 +346,37 @@ a {
 /* Blue Arrow - Connecting STRATERGIST to Green Bubble */
 .hero-blue-arrow {
     position: absolute;
-    right: 80px;
-    top: 50px;
-    width: 120px;
-    height: 100px;
+    right: 90px;
+    bottom: 40px;
+    width: 250px;
+    height: 20px; /* Thinner for horizontal arrow */
     z-index: 15;
 }
 
 .hero-blue-arrow svg {
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 /* Blue MEETS Bubble - Bottom Left */
  .hero-blue-bubble {
     position: absolute;
     left: 0;
-    bottom: 0; /* Aligned to bottom baseline */
-    overflow: visible; 
+    bottom: 0;
+    /* Remove overflow and border-radius that cut the triangle */
+    overflow: visible;
     
-    height: 83px; /* Match top row height */
+    height: 83px;
     width: auto;
     background: url('../assets/images/ic_blue-bubble.svg') no-repeat center center;
-    background-size: 100% 100%;
+    background-size: contain; /* Use contain to preserve aspect ratio */
+    background-position: left center;
     
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 32px; /* Equal spacing on sides */
-    
-    border-radius: 56px;
+    padding: 0 32px;
     z-index: 20;
 }
 
@@ -402,7 +403,7 @@ a {
 /* Storytelling Text - Center Bottom */
 .hero-storytelling {
     position: absolute;
-    left: 220px; /* ~32px gap from MEETS bubble end */
+    left: 220px;
     bottom: 0; 
     font-family: 'Zeyada', cursive;
     font-size: 100px;
@@ -413,11 +414,11 @@ a {
     z-index: 1;
 }
 
-/* Green Bubble - Bottom Right - overlaps STORYTELLING by ~11px */
+/* Green Bubble - Bottom Right - closer to STORYTELLING */
 .hero-green-bubble {
     position: absolute;
-    right: 80px;
-    bottom: 0; /* Aligned bottom */
+    right: 100px; /* Closer to text */
+    bottom: 0;
     width: 80px;
     height: 80px;
 }
@@ -446,7 +447,7 @@ a {
    ========================================= */
 .hero-footer {
     position: absolute;
-    bottom: 75px; /* Distance from bottom of viewport */
+    bottom: 75px;
     left: 70px;
     right: 70px;
     display: flex;
@@ -454,8 +455,8 @@ a {
     align-items: center;
     z-index: 15;
     font-family: var(--font-code);
-    font-size: 9px;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px; /* Increased from 9px */
+    color: rgba(255, 255, 255, 0.7); /* Slightly brighter */
 }
 
 .hero-footer-left {
@@ -467,7 +468,7 @@ a {
 .status-dot {
     width: 6px;
     height: 6px;
-    background-color: #39FF14; /* Neon green */
+    background-color: #39FF14;
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
 }
@@ -478,7 +479,10 @@ a {
 }
 
 .hero-footer-right {
-    text-align: right;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
 }
 
 /* Desktop-first sizing tweaks to better match Figma */
