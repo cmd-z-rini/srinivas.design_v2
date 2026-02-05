@@ -42,20 +42,25 @@
     </nav>
 
     <header class="hero">
+        <!-- Radial Gradient Overlay for visibility -->
+        <div class="hero-gradient-overlay"></div>
+        
         <div class="creative-container">
             
             <!-- Language Selection Bar -->
             <div class="language-bar">
-                <div class="lang-item">
-                    <span class="lang-label">h</span>
+                <div class="lang-char">h</div>
+                <div class="lang-char">i</div>
+                <div class="lang-pill filled">வணக்கம்</div>
+                <div class="lang-tag"><span style="color: #666;">o</span><span style="color: #ccc;">i</span></div>
+                <div class="lang-wavy">hola</div>
+                <div class="lang-group-connect">
+                    <div class="lang-pill outline">你好</div>
+                    <div class="lang-connector-line"></div>
+                    <div class="lang-circle-icon">
+                        <div class="inner-circle"></div>
+                    </div>
                 </div>
-                <div class="lang-item">
-                    <span class="lang-label">i</span>
-                </div>
-                <div class="lang-badge">வணக்கம்</div>
-                <span class="lang-text">oi</span>
-                <span class="lang-text">hola</span>
-                <div class="lang-badge lang-badge--outline">ciao</div>
             </div>
 
             <!-- Hero Content: All Elements -->
@@ -63,10 +68,6 @@
                 <!-- Red Bubble (Top Left) -->
                 <div class="hero-red-bubble">
                     <img src="assets/images/ic_red-bubble.svg" alt="red bubble" class="ic-red-bubble">
-                    <div class="red-bubble-text">
-                        <div class="red-text-line">ou wish exist</div>
-                        <div class="red-text-line">create things</div>
-                    </div>
                 </div>
 
                 <!-- Purple STRATERGIST Bubble (Top Center-Right) -->
@@ -75,9 +76,17 @@
                     <span class="stratergist-text">STRATERGIST</span>
                 </div>
 
+                <!-- Blue Arrow (Connecting STRATERGIST to Green Bubble) -->
+                <div class="hero-blue-arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none">
+                        <path d="M10 10 Q 60 10, 80 50 T 100 90" stroke="#0051FF" stroke-width="3" fill="none" stroke-dasharray="8 4" stroke-linecap="round"/>
+                        <polygon points="95,80 110,95 90,95" fill="#0051FF"/>
+                    </svg>
+                </div>
+
                 <!-- Blue MEETS Bubble (Bottom Left) -->
                 <div class="hero-blue-bubble">
-                    <img src="assets/images/ic_nblue-bubble.svg" alt="blue bubble">
+                    <img src="assets/images/ic_blue-bubble.svg" alt="blue bubble">
                     <span class="meets-text">MEETS</span>
                 </div>
 
@@ -87,10 +96,20 @@
                 <!-- Green Bubble (Bottom Right) -->
                 <div class="hero-green-bubble">
                     <img src="assets/images/ic_green-bubble.svg" alt="green bubble">
-                    <span class="green-bubble-text">eo</span>
                 </div>
             </div>
 
+        </div>
+        
+        <!-- Hero Footer - Available for work & Scroll to explore -->
+        <div class="hero-footer">
+            <div class="hero-footer-left">
+                <span class="status-dot"></span>
+                <span>available for work</span>
+            </div>
+            <div class="hero-footer-right">
+                <span>[scroll to explore]</span>
+            </div>
         </div>
     </header>
 

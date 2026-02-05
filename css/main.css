@@ -86,6 +86,24 @@ a {
     mask-image: linear-gradient(to bottom, black 85%, transparent);
 }
 
+/* Radial Gradient Overlay - Visibility enhancement behind creative */
+.hero-gradient-overlay {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    width: 100%; /* Full width */
+    height: 805px;
+    background: radial-gradient(
+        ellipse 100% 238px at center,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    pointer-events: none;
+    z-index: 5;
+}
+
 /* =========================================
    4. CREATIVE TYPOGRAPHY (Zone B)
    ========================================= */
@@ -95,70 +113,154 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 16px; /* Reduced gap */
 }
 
 /* Language/Greeting Bar (Top) */
 .language-bar {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 4px; /* Tighter gap between h and i */
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     font-family: var(--font-code);
-    font-size: 14px;
 }
 
-.lang-item {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+/* Spacer between groups */
+.lang-spacer {
+    width: 8px;
+}
+
+/* 1. (h) & (i) Boxes -> Exact Figma specs */
+.lang-char {
+    width: 23.412px;
+    height: 23.412px;
+    border: 1.142px solid #FFF;
+    border-radius: 9px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+    background: transparent;
+}
+
+/* 2. [வணக்கம்] Filled Pill -> More padding on left/right */
+.lang-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23.412px;
+    padding: 0 16px; /* More left/right space */
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.lang-pill.filled {
+    height: 23.412px;
+    padding: 5.42px 4.85px 4px 5.42px; /* Top Right Bottom Left from Figma */
+    justify-content: center;
+    background: #363636;
+    border-radius: 8.566px 0 0 3.426px;
+    color: #e0e0e0;
+    font-size: 14px;
+    width: auto; /* Let content + padding define width */
+}
+
+/* 3. [oi >] Tag Shape */
+.lang-tag {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23.412px;
+    padding: 1.71px 9.42px 4px 4.28px; /* Exact Figma padding */
+    background-color: #363636;
+    font-size: 14px;
+    font-weight: 700;
+    
+    /* Arrow tip shape */
+    clip-path: polygon(
+        0% 0%, 
+        calc(100% - 8px) 0%, 
+        100% 50%, 
+        calc(100% - 8px) 100%, 
+        0% 100%
+    );
+}
+
+/* 4. hola (wavy underline) - Fixed width 35.5px */
+.lang-wavy {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e0e0e0;
+    padding: 0 8px;
+    position: relative;
+    margin: 0 6px;
+}
+
+.lang-wavy::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -4px;
+    width: 35.5px; /* Fixed width from Figma */
+    height: 4px;
+    background: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="35.5" height="6" viewBox="0 0 35.5 6" preserveAspectRatio="none"%3E%3Cpath d="M0 3 Q 4.44 0, 8.88 3 T 17.75 3 T 26.63 3 T 35.5 3" fill="none" stroke="%23666" stroke-width="1.5"/%3E%3C/svg%3E');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+/* 5. Group: (你好) -- (O) */
+.lang-group-connect {
+    display: flex;
+    align-items: center;
+}
+
+.lang-pill.outline {
+    border: 2px solid white; /* Thicker border for visibility */
+    background: transparent;
+    color: white;
+    font-weight: 700;
+    height: 23.412px;
+    padding: 0 12px;
+    border-radius: 999px;
+}
+
+.lang-connector-line {
+    width: 16px;
+    height: 2px;
+    background-color: white;
+}
+
+.lang-circle-icon {
+    width: 23.412px;
+    height: 23.412px;
+    border: 2px solid white; /* Match outline pill border */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.inner-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #d9d9d9; 
+}
+
+/* Hover effects (Optional) */
+.lang-char:hover, .lang-pill:hover, .lang-tag:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-.lang-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-.lang-label {
-    font-weight: 600;
-    font-size: 12px;
-}
-
-.lang-badge {
-    padding: 6px 14px;
-    border-radius: 16px;
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 13px;
-    font-weight: 500;
-}
-.lang-badge:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-}
-
-.lang-badge--outline {
-    border: 2px solid var(--color-border-dim);
-    background-color: transparent;
-}
-
-.lang-text {
-    font-size: 13px;
-    opacity: 0.8;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-}
-.lang-text:hover {
-    opacity: 1;
 }
 
 
@@ -170,17 +272,17 @@ a {
 .creative-group-container {
     position: relative;
     width: 1200px;
-    height: 350px;
+    height: 280px; /* Reduced height - tighter vertical spacing */
     margin: 0 auto;
 }
 
-/* Red Bubble - Top Left */
+/* Red Bubble - Top Left - Same height as STRATERGIST */
 .hero-red-bubble {
     position: absolute;
-    left: 50px;
-    top: 50px;
-    width: 320px;
-    height: 110px;
+    left: 0;
+    top: 0; /* Aligned with Purple Bubble top */
+    width: 280px;
+    height: 83px; /* Match STRATERGIST height */
 }
 
 .hero-red-bubble img {
@@ -209,24 +311,29 @@ a {
 /* Purple STRATERGIST Bubble - Top Right */
 .hero-purple-bubble {
     position: absolute;
-    left: 380px;
-    top: 20px;
-    width: 520px;
-    height: 100px;
+    left: 304px; /* 280px (red width) + 24px gap */
+    top: 0; /* Aligned with Red Bubble */
+    height: 83px;
+    width: auto;
+    background: url('../assets/images/ic_purple-bubble.svg') no-repeat center center;
+    background-size: 100% 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px; /* Equal spacing on sides - from Figma 24px */
 }
 
+/* Hide the IMG tag since we are using background */
 .hero-purple-bubble img {
-    width: 100%;
-    height: 100%;
-    display: block;
+    display: none;
 }
 
 .stratergist-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 42px;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    font-size: 36px; /* Slightly smaller to fit better */
     color: white;
     font-family: 'Goblin One', sans-serif;
     text-transform: uppercase;
@@ -236,27 +343,53 @@ a {
     z-index: 2;
 }
 
-/* Blue MEETS Bubble - Bottom Left */
-.hero-blue-bubble {
+/* Blue Arrow - Connecting STRATERGIST to Green Bubble */
+.hero-blue-arrow {
     position: absolute;
-    left: 0;
-    bottom: 30px;
-    width: 290px;
+    right: 80px;
+    top: 50px;
+    width: 120px;
     height: 100px;
+    z-index: 15;
 }
 
-.hero-blue-bubble img {
+.hero-blue-arrow svg {
     width: 100%;
     height: 100%;
-    display: block;
+}
+
+/* Blue MEETS Bubble - Bottom Left */
+ .hero-blue-bubble {
+    position: absolute;
+    left: 0;
+    bottom: 0; /* Aligned to bottom baseline */
+    overflow: visible; 
+    
+    height: 83px; /* Match top row height */
+    width: auto;
+    background: url('../assets/images/ic_blue-bubble.svg') no-repeat center center;
+    background-size: 100% 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px; /* Equal spacing on sides */
+    
+    border-radius: 56px;
+    z-index: 20;
+}
+
+/* Hide the IMG/SVG tag inside */
+.hero-blue-bubble img, .hero-blue-bubble svg {
+    display: none;
 }
 
 .meets-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 40px;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    font-size: 36px;
     color: white;
     font-family: 'Goblin One', sans-serif;
     text-transform: uppercase;
@@ -269,10 +402,10 @@ a {
 /* Storytelling Text - Center Bottom */
 .hero-storytelling {
     position: absolute;
-    left: 320px;
-    bottom: 0;
+    left: 220px; /* ~32px gap from MEETS bubble end */
+    bottom: 0; 
     font-family: 'Zeyada', cursive;
-    font-size: 120px;
+    font-size: 100px;
     font-weight: 400;
     color: white;
     line-height: 1;
@@ -280,13 +413,13 @@ a {
     z-index: 1;
 }
 
-/* Green Bubble - Bottom Right */
+/* Green Bubble - Bottom Right - overlaps STORYTELLING by ~11px */
 .hero-green-bubble {
     position: absolute;
-    right: 30px;
-    bottom: -10px;
-    width: 140px;
-    height: 140px;
+    right: 80px;
+    bottom: 0; /* Aligned bottom */
+    width: 80px;
+    height: 80px;
 }
 
 .hero-green-bubble img {
@@ -306,6 +439,46 @@ a {
     color: white;
     font-weight: 700;
     z-index: 2;
+}
+
+/* =========================================
+   HERO FOOTER - Bottom of fold
+   ========================================= */
+.hero-footer {
+    position: absolute;
+    bottom: 75px; /* Distance from bottom of viewport */
+    left: 70px;
+    right: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 15;
+    font-family: var(--font-code);
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #39FF14; /* Neon green */
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.hero-footer-right {
+    text-align: right;
 }
 
 /* Desktop-first sizing tweaks to better match Figma */
