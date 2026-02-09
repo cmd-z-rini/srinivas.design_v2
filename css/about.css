@@ -1,0 +1,9 @@
+/* hero.css or a new next-fold.css */
+.next-fold {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;      /* Takes up a full screen */
+    background-color: var(--color-bg-black); /* Pure black from global.css */
+    background-image: none; /* REMOVES THE GRID specifically if inherited */
+    z-index: 1;
+}

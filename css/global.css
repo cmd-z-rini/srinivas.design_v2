@@ -1,0 +1,31 @@
+
+:root {
+    /* Existing Brand Colors */
+    --color-bg-black: #000000;
+    --color-text-white: #ffffff;
+    --color-neon-pink: #C100CF;
+    --color-neon-blue: #0051FF;
+    --color-neon-green: #39FF14;
+    
+    /* Existing Typography */
+    --font-code: 'Space Mono', monospace;
+    --font-heavy: 'Goblin One', display;
+    --font-hand: 'Zeyada', cursive;
+
+    /* LAYOUT DEFAULTS - Keep it at 1 fold for now */
+    --hero-height: 100vh; /* LAYOUT DEFAULTS */
+    --header-height: 90px; /* ADD THIS LINE: Set your desired taller height here */
+}
+
+/* Reset styles that apply to ALL folds */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg-black);
+    color: var(--color-text-white);
+    overflow-x: hidden;
+}

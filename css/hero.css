@@ -1,3 +1,12 @@
+:root {
+    /* Standard base is 16px. 100% = 16px. */
+    /* If you want everything slightly smaller, change this to 95% */
+    font-size: 100%; 
+}
+
+/* =========================================
+   1. RESET & BASE STYLES
+   ========================================= */
 /* =========================================
    1. RESET & BASE STYLES
    ========================================= */
@@ -89,19 +98,19 @@ a {
 /* Radial Gradient Overlay - Visibility enhancement behind creative */
 .hero-gradient-overlay {
     position: absolute;
-    top: 50%;
+    top: 45%;               /* CHANGED: Pulled up from 50% */
     left: 0;
     right: 0;
     transform: translateY(-50%);
-    width: 100%; /* Full width */
-    height: 805px;
+    width: 100%;
+    height: 805px;          /* Matches your current height */
     background: radial-gradient(
         ellipse 100% 238px at center,
         rgba(0, 0, 0, 1) 0%,
         rgba(0, 0, 0, 0.2) 100%
     );
     pointer-events: none;
-    z-index: 5;
+    z-index: 5;             /* Stays behind creative, but in front of grid */
 }
 
 /* =========================================
@@ -114,6 +123,7 @@ a {
     flex-direction: column;
     align-items: center;
     gap: 16px; /* Reduced gap */
+    margin-top: -60px;       /* Manual nudge UP to clear the bottom half of the screen */
 }
 
 /* Language/Greeting Bar (Top) */
@@ -123,7 +133,7 @@ a {
     gap: 8px; /* Consistent gap between all elements */
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 24px;
+    margin-bottom: 72px;
     font-family: var(--font-code);
 }
 
@@ -198,22 +208,34 @@ a {
     font-size: 14px;
     font-weight: 700;
     color: #e0e0e0;
-    padding: 0 4px; /* Reduced from 8px to 4px */
-    position: relative;
+    padding: 0 4px;
+    position: relative; /* REQUIRED to anchor the wavy line */
     margin: 0;
+    
+    /* THE INTERACTIVE SETTINGS */
+    display: inline-block; 
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1; /* Ensures the pill stays above the grid */
 }
 
+/* Ensure the wave stays attached */
 .lang-wavy::after {
     content: "";
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -4px;
-    width: 35.5px; /* Fixed width from Figma */
+    bottom: -4px; /* Keeps it exactly 4px below the text */
+    width: 35.5px;
     height: 4px;
-    background: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="35.5" height="6" viewBox="0 0 35.5 6" preserveAspectRatio="none"%3E%3Cpath d="M0 3 Q 4.44 0, 8.88 3 T 17.75 3 T 26.63 3 T 35.5 3" fill="none" stroke="%23666" stroke-width="1.5"/%3E%3C/svg%3E');
+    background: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="35.5" height="4" viewBox="0 0 35.5 4" fill="none"%3E%3Cpath d="M1 2.5C2.5 1 4.5 1 6 2.5C7.5 4 9.5 4 11 2.5C12.5 1 14.5 1 16 2.5C17.5 4 19.5 4 21 2.5C22.5 1 24.5 1 26 2.5C27.5 4 29.5 4 31 2.5C32.5 1 34.5 1 36 2.5" stroke="%23e0e0e0" stroke-width="1.5" stroke-linecap="round"/%3E%3C/svg%3E');
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    pointer-events: none;
+}
+
+.lang-wavy:hover {
+    transform: translateY(-5px); /* BOTH text and underline will now rise */
 }
 
 /* 5. Group: (你好) -- (O) */
@@ -269,115 +291,111 @@ a {
    CREATIVE GROUP CONTAINER - Hero Layout
    ========================================= */
 
+/* The Parent Layout Container */
 .creative-group-container {
+    display: relative;
+    flex-direction: column;
+    gap: 30px;              /* */
     position: relative;
-    width: 1200px;
-    height: 280px; /* Reduced height - tighter vertical spacing */
-    margin: 0 auto;
-}
-
-/* Red Bubble - Top Left - Same height as STRATERGIST */
-.hero-red-bubble {
-    position: absolute;
-    left: 0;
-    top: 0; /* Aligned with Purple Bubble top */
-    width: 280px;
-    height: 83px; /* Match STRATERGIST height */
-}
-
-.hero-red-bubble img {
     width: 100%;
-    height: 100%;
-    display: block;
+    max-width: 1200px;
+    margin: 0 auto;         /* Horizontally centers the 1200px container */
+    align-items: center;    /* NEW: Centers both rows relative to the screen center */
 }
 
-.red-bubble-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Zeyada', cursive;
-    font-size: 15px;
-    color: #2C0606;
-    text-align: center;
-    line-height: 1.3;
-    z-index: 2;
-}
-
-.red-text-line {
-    margin: 0;
-}
-
-/* Purple STRATERGIST Bubble - Top Right */
-.hero-purple-bubble {
-    position: absolute;
-    left: 304px; /* 280px (red width) + 24px gap */
-    top: 0; /* Aligned with Red Bubble */
-    height: 83px;
-    width: auto;
-    background: url('../assets/images/ic_purple-bubble.svg') no-repeat center center;
-    background-size: 100% 100%; 
+/* TOP ROW: Ensures bubbles sit side-by-side without overlapping */
+.hero-bubble-row-top {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 24px; /* Equal spacing on sides - from Figma 24px */
-}
-
-/* Hide the IMG tag since we are using background */
-.hero-purple-bubble img {
-    display: none;
-}
-
-.stratergist-text {
+    width: auto;            /* */
+    justify-content: center; /* NEW: Ensures bubbles stay grouped in the center */
+    align-items: center;    /* Anchors everything to the 93px center line */
+    gap: 24px;              /* The specific horizontal gap between Red and Purple */
     position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    font-size: 36px; /* Slightly smaller to fit better */
-    color: white;
-    font-family: 'Goblin One', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    z-index: 10;
+}
+
+/* BOTTOM ROW: Meets, Storytelling, and Green Bubble */
+.hero-bubble-row-bottom {
+    display: flex;
+    align-items: baseline;  /* Aligns "MEETS" bottom to "STORYTELLING" baseline */
+    gap: 32px;              /* Horizontal breathing room for the second row */
+    position: relative;
+}
+
+
+/* Update Red Bubble to sit inside the flex row */
+.hero-red-bubble {
+    width: 236px;
+    height: 88px;           /* LOCKED HEIGHT */
+    background: url('../assets/images/hero/ic_red-bubble.svg') no-repeat center center;
+    background-size: 100% 100%;
+    flex-shrink: 0;
+}
+
+/* Update Purple Bubble to sit inside the flex row */
+.hero-purple-bubble {
+    height: 88px;           /* */
+    background: url('../assets/images/hero/ic_purple-bubble.svg') no-repeat;
+    background-size: 100% 100%; /* Now works perfectly with preserveAspectRatio="none" */
+    display: flex;
+    align-items: center;    /* */
+    box-sizing: border-box; /* */
+    padding: 0 65px 0 35px; /* */
+}
+
+/* Stratergist text inside the Purple Bubble  */
+.strategist-text {
+   font-family: 'Goblin One', serif; /* */
+    font-size: 2.3rem;      /* Larger scale to fill the bubble */
+    letter-spacing: 0.02em; /* Tighter tracking for heavy weight */
+    line-height: 0.2;
+    margin-top: -2px;      /* Optical center nudge */
+    color: #FFFFFF;
     white-space: nowrap;
-    font-weight: 700;
-    z-index: 2;
 }
 
-/* Blue Arrow - Connecting STRATERGIST to Green Bubble */
-.hero-blue-arrow {
+/* Blue Arrow - Connecting STRATEGIST to Green Bubble */
+.hero-blue-arrow-container {
     position: absolute;
-    right: 90px;
-    bottom: 40px;
-    width: 250px;
-    height: 20px; /* Thinner for horizontal arrow */
-    z-index: 15;
+    z-index: 100;
+    pointer-events: none;
+    
+    background: url('../assets/images/hero/ic_hero-arrow.svg') no-repeat center center;
+    background-size: contain;
+    
+    width: 150px;           /* */
+    height: 100px;          /* */
+    
+    /* 1. MOVE TOP & RIGHT: Adjusting these to snap the tail to the purple tip */
+    top: 22px;              /* DECREASED from 45px to move it TOP */
+    left: 60%;              /* */
+    margin-left: 220px;     /* INCREASED from 205px to move it RIGHT */
+    
+    /* 2. THE AIM: Using top-left as the hinge to pivot toward the text */
+    transform-origin: top left; /* */
+    transform: rotate(-6deg);   /* Slight increase to point it better at the gap */
 }
 
-.hero-blue-arrow svg {
-    width: 100%;
-    height: 100%;
-    display: block;
+.hero-bubble-row-bottom {
+    display: flex;
+    align-items: center;    /* Keeps everything on a level horizontal axis */
+    justify-content: center;
+    gap: 32px;
+    position: relative;
+    margin-top: 15px;       /* Tightens the space between the two rows */
 }
 
 /* Blue MEETS Bubble - Bottom Left */
  .hero-blue-bubble {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    /* Remove overflow and border-radius that cut the triangle */
-    overflow: visible;
-    
-    height: 83px;
-    width: auto;
-    background: url('../assets/images/ic_blue-bubble.svg') no-repeat center center;
-    background-size: contain; /* Use contain to preserve aspect ratio */
-    background-position: left center;
-    
+    position: relative;
+    height: 88px;           /* UNIFIED HEIGHT */
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 32px;
-    z-index: 20;
+    background: url('../assets/images/hero/ic_blue-bubble.svg') no-repeat;
+    background-size: 100% 100%;
+    /* ASYMMETRICAL PADDING: Pulls the left side in significantly */
+    padding: 0 45px 0 32px;
+    box-sizing: border-box;
 }
 
 /* Hide the IMG/SVG tag inside */
@@ -386,39 +404,37 @@ a {
 }
 
 .meets-text {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    font-size: 36px;
+    font-family: 'Goblin One', serif;
+    font-size: 2.3rem;
     color: white;
-    font-family: 'Goblin One', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    font-weight: 700;
-    z-index: 2;
+    line-height: 1;
+    margin-top: -6px;       /* Optical nudge for the tail */
+}
+
+/* Ensure the Green Bubble also respects the 88px track height */
+.hero-green-bubble img {
+    height: 88px;           /* EXACT match for the top row and blue bubble */
+    width: auto;
+    display: block;
 }
 
 /* Storytelling Text - Center Bottom */
 .hero-storytelling {
-    position: absolute;
-    left: 220px;
-    bottom: 0; 
-    font-family: 'Zeyada', cursive;
-    font-size: 100px;
-    font-weight: 400;
-    color: white;
-    line-height: 1;
-    white-space: nowrap;
-    z-index: 1;
+    font-family: 'Zeyada', cursive; /* */
+    font-size: 6rem;             /* */
+    color: #FFFFFF;                /* */
+    margin: 0;                     /* */
+    line-height: 0.8;              /* */
+    
+    /* NEW: Optical Baseline Nudge */
+    transform: translateY(20px);    /* Pushes text down exactly 20px for alignment */
+    /* Alternatively, use: margin-top: 3px; */
 }
 
 /* Green Bubble - Bottom Right - closer to STORYTELLING */
 .hero-green-bubble {
-    position: absolute;
-    right: 100px; /* Closer to text */
-    bottom: 0;
+    position: relative;
     width: 80px;
     height: 80px;
 }
@@ -445,44 +461,53 @@ a {
 /* =========================================
    HERO FOOTER - Bottom of fold
    ========================================= */
+
 .hero-footer {
-    position: absolute;
-    bottom: 75px;
-    left: 70px;
-    right: 70px;
+    position: fixed;         /* Pins it to the viewport, ignoring parent masks */
+    bottom: 40px;            /* Precise 40px gap from the bottom edge */
+    left: 0;
+    width: 100vw;            /* */
+    height: auto;
+    
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centers the [scroll to explore] hint */
     align-items: center;
-    z-index: 15;
-    font-family: var(--font-code);
-    font-size: 11px; /* Increased from 9px */
-    color: rgba(255, 255, 255, 0.7); /* Slightly brighter */
+    padding: 0 50px;         /* Maintains your 50px side margins */
+    box-sizing: border-box;
+
+    /* THE OVERLAY KILLER */
+    z-index: 9999;           /* Sits on the very top layer */
+    color: #FFFFFF;          /* Pure white visibility */
+    pointer-events: none;    /* Transparent to clicks for elements 'behind' it */
 }
 
+/* 1. PINNED LEFT ELEMENT (50px Margin) */
 .hero-footer-left {
+    position: absolute;     /* Pulls it out of the flex center-flow */
+    left: 50px;             /* PINNED 50PX FROM LEFT EDGE */
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
+    pointer-events: auto;   /* Makes the text/dot interactive */
 }
 
+/* 2. CENTERED ELEMENT */
+.hero-footer-right {
+    position: relative; 
+    left: auto;
+    transform: none;        /* Removes any accidental centering offsets */
+    text-align: center;
+    pointer-events: auto;
+}
+
+/* 3. NEON STATUS DOT */
 .status-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;             /* Slightly larger for visibility */
+    height: 8px;
     background-color: #39FF14;
     border-radius: 50%;
+    box-shadow: 0 0 8px #39FF14; /* Added glow to match Figma feel */
     animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-.hero-footer-right {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
 }
 
 /* Desktop-first sizing tweaks to better match Figma */
@@ -491,8 +516,17 @@ a {
 }
 
 /* =========================================
-   5. RESPONSIVE (Mobile)
+   5. RESPONSIVE (Scaling & Mobile)
    ========================================= */
+
+/* Add this new block first around Line 457 */
+@media (max-width: 1200px) {
+    html { 
+        font-size: 90%; /* Everything—text, bubbles, gaps—shrinks perfectly in unison. */
+    }
+}
+
+/* Your existing mobile rule remains below it */
 @media (max-width: 768px) {
     .creative-group-container {
         width: 100%;

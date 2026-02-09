@@ -1,0 +1,14 @@
+/* nav.css */
+nav {
+    height: var(--header-height); /* Pulls the 120px from global.css */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    /* ... rest of your nav styles ... */
+
+    /* THE MARGIN FIX */
+    padding: 0 50px;               /* 50px gap on both sides */
+    box-sizing: border-box;        /* Ensures padding doesn't increase total width */
+}
